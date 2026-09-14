@@ -14,6 +14,7 @@ import {
   Cherry,
   Club,
   CodeXml,
+  DraftingCompass,
   FileText,
   Folder,
   Grid3x3,
@@ -264,5 +265,13 @@ export const BUILTIN_APPS: readonly RegisterBuiltinAppOptions[] = [
       spawnOfficeWindow({ kind: 'sheet' })?.open()
       return false
     },
+  },
+  {
+    id: BuiltinAppId.Cad,
+    icon: DraftingCompass,
+    defaultCoordinate: nextDesktopCoord(),
+    width: 880,
+    height: 640,
+    loadApp: () => import('@/features/cad').then((m) => m.CadApp),
   },
 ]

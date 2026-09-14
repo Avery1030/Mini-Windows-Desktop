@@ -27,6 +27,7 @@ export enum BuiltinAppId {
   FileExplorer = 'fileExplorer',
   Writer = 'writer',
   Sheet = 'sheet',
+  Cad = 'cad',
 }
 
 /** 收纳进「游戏」集合的内置小游戏 id（顺序即列表展示顺序）。清单已冻结，勿再新增。 */

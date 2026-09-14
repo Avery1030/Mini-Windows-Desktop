@@ -2,13 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const DEFAULT_DURATION = 2000
-
 /**
  * 复制到剪贴板；成功后短暂置 `isCopied`，超时后自动复位。
  * @param duration 复位延迟（ms），默认 2000；≤0 表示不自动复位
  */
-export function useCopyClipboard(duration = DEFAULT_DURATION) {
+export function useCopyClipboard(duration = 2000) {
   const [isCopied, setIsCopied] = useState(false)
   const timerRef = useRef<Nullable<ReturnType<typeof setTimeout>>>(null)
 

@@ -6,10 +6,12 @@ import { officeKindFromPath } from '@/features/office/fileTypes'
 import '@/features/office/store'
 import { openIdeFile } from '@/lib/desktop/window/ideWindows'
 import { openOfficeFile } from '@/lib/desktop/window/officeWindows'
+import { BuiltinAppId } from '@/config/desktop'
 import { resolveOpenTarget } from '@/lib/desktop/appRegister'
+import { requestOpenCad } from '@/features/cad/pendingOpen'
 import { spawnExplorerWindow } from '@/lib/desktop/window/explorerWindows'
 
-export type OpenVfsFileKind = 'image' | 'text' | 'code' | 'office' | 'exe' | 'folder' | 'unsupported'
+export type OpenVfsFileKind = 'image' | 'text' | 'code' | 'office' | 'cad' | 'exe' | 'folder' | 'unsupported'
 
 /**
  * 按应用注册表打开 VFS 路径（文件夹 → 资源管理器）。
@@ -33,6 +35,13 @@ export async function openVfsFile(filePath: string): Promise<OpenVfsFileKind> {
   if (hint.kind === 'ide') {
     openIdeFile(filePath)
     return 'code'
+  }
+
+  if (hint.kind === 'cad') {
+    requestOpenCad(filePath)
+    const { useWindowStore } = await import('@/store/window')
+    useWindowStore.getState().openWindow(BuiltinAppId.Cad)
+    return 'cad'
   }
 
   try {

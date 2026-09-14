@@ -5,6 +5,7 @@
 export type RegisteredAppKind =
   | 'writer'
   | 'sheet'
+  | 'cad'
   | 'notepad'
   | 'image'
   | 'ide'
@@ -18,11 +19,13 @@ export type FileOpenEntry = {
 
 export const WRITER_EXT = 'wps'
 export const SHEET_EXT = 'et'
+export const CAD_EXT = 'cadjson'
 
 /** 按扩展名直接映射的打开目标 */
 export const FILE_OPEN_BY_EXT: Record<string, FileOpenEntry> = {
   [WRITER_EXT]: { kind: 'writer' },
   [SHEET_EXT]: { kind: 'sheet' },
+  [CAD_EXT]: { kind: 'cad' },
   txt: { kind: 'notepad' },
   exe: { kind: 'exe' },
 }
